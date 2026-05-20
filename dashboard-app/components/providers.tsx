@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from "react"
-import { ThemeProvider } from "next-themes"
 import { NuqsAdapter } from "nuqs/adapters/next/app"
+import { ThemeProvider } from "@/components/theme-provider"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { Toaster } from "@/components/ui/sonner"
 
@@ -27,7 +27,8 @@ function readStoredDirection(): Direction {
 }
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [direction, setDirection] = React.useState<Direction>(readStoredDirection)
+  const [direction, setDirection] =
+    React.useState<Direction>(readStoredDirection)
 
   React.useEffect(() => {
     document.documentElement.setAttribute("dir", direction)
@@ -42,10 +43,13 @@ export function Providers({ children }: { children: React.ReactNode }) {
     <DirectionContext.Provider
       value={{ direction, setDirection, toggleDirection }}
     >
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <ThemeProvider>
         <NuqsAdapter>
           <TooltipProvider delay={0}>{children}</TooltipProvider>
-          <Toaster richColors position={direction === "rtl" ? "top-left" : "top-right"} />
+          <Toaster
+            richColors
+            position={direction === "rtl" ? "top-left" : "top-right"}
+          />
         </NuqsAdapter>
       </ThemeProvider>
     </DirectionContext.Provider>

@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000).
 
 - Next.js 16 (App Router)
 - shadcn/ui (Base UI + Tabler icons)
-- TanStack Table, Recharts, nuqs, next-themes, Sonner
+- TanStack Table, Recharts, nuqs, Sonner
 
 ## Project structure
 

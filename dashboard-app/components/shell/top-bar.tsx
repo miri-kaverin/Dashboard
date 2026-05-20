@@ -9,7 +9,7 @@ import {
   IconTextDirectionLtr,
   IconTextDirectionRtl,
 } from "@tabler/icons-react"
-import { useTheme } from "next-themes"
+import { useTheme } from "@/components/theme-provider"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { SidebarTrigger } from "@/components/ui/sidebar"
@@ -18,7 +18,7 @@ import { useDirection } from "@/components/providers"
 import { CommandPalette } from "@/components/shell/command-palette"
 
 export function TopBar() {
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const { direction, toggleDirection } = useDirection()
   const searchRef = React.useRef<HTMLInputElement>(null)
 
@@ -65,10 +65,12 @@ export function TopBar() {
           <Button
             variant="ghost"
             size="icon-sm"
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() =>
+              setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            }
             aria-label="Toggle theme"
           >
-            {theme === "dark" ? (
+            {resolvedTheme === "dark" ? (
               <IconSun className="size-4" />
             ) : (
               <IconMoon className="size-4" />

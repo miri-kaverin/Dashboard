@@ -12,7 +12,7 @@ import {
   IconTextDirectionRtl,
   IconUsers,
 } from "@tabler/icons-react"
-import { useTheme } from "next-themes"
+import { useTheme } from "@/components/theme-provider"
 import {
   CommandDialog,
   CommandEmpty,
@@ -29,7 +29,7 @@ import { navItems } from "@/components/shell/nav-config"
 export function CommandPalette() {
   const [open, setOpen] = React.useState(false)
   const router = useRouter()
-  const { theme, setTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const { direction, toggleDirection } = useDirection()
 
   React.useEffect(() => {
@@ -84,10 +84,12 @@ export function CommandPalette() {
         <CommandGroup heading="Preferences">
           <CommandItem
             onSelect={() =>
-              run(() => setTheme(theme === "dark" ? "light" : "dark"))
+              run(() =>
+                setTheme(resolvedTheme === "dark" ? "light" : "dark")
+              )
             }
           >
-            {theme === "dark" ? <IconSun /> : <IconMoon />}
+            {resolvedTheme === "dark" ? <IconSun /> : <IconMoon />}
             Toggle theme
           </CommandItem>
           <CommandItem onSelect={() => run(toggleDirection)}>
